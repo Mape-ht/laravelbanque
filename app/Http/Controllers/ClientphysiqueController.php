@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Clientphysique;
 use Illuminate\Http\Request;
 
 class ClientphysiqueController extends Controller
@@ -11,9 +12,10 @@ class ClientphysiqueController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function indexClientphysique()
     {
-        //
+        $clientphysique = Clientphysique::all();
+        return view('clientphysique',['clientphysiques'=>$clientphysique,'layout'=>'indexClientphysique']);
     }
 
     /**
@@ -21,9 +23,10 @@ class ClientphysiqueController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function createClientphysique()
     {
-        //
+        $clientphysique = Clientphysique::all();
+        return view('clientphysique',['clientphysiques'=>$clientphysique,'layout'=>'createClientphysique']);
     }
 
     /**
@@ -32,9 +35,17 @@ class ClientphysiqueController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function storeClientphysique(Request $request)
     {
-        //
+        $clientphysique = new Clientphysique();
+        $clientphysique->nom = $request->input('nom');
+        $clientphysique->prenom = $request->input('prenom');
+        $clientphysique->adresse = $request->input('adresse');
+        $clientphysique->telephone = $request->input('telephone');
+        $clientphysique->statut = $request->input('statut');
+        $clientphysique->salaire = $request->input('salaire');
+        $clientphysique->save();
+        return redirect('/clientphysique');
     }
 
     /**
@@ -43,9 +54,11 @@ class ClientphysiqueController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function showClientphysique($id)
     {
-        //
+        $clientphysique = Clientphysique::find($id);
+        $clientphysiques = Clientphysique::all();
+        return view('clientphysique',['clientphysiques'=>$clientphysiques,'clientphysique'=>$clientphysique,'layout'=>'showClientphysique']);
     }
 
     /**
@@ -54,9 +67,11 @@ class ClientphysiqueController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function editClientphysique($id)
     {
-        //
+        $clientphysique = Clientphysique::find($id);
+        $clientphysiques = Clientphysique::all();
+        return view('clientphysique',['clientphysiques'=>$clientphysiques,'clientphysique'=>$clientphysique,'layout'=>'editClientphysique']);
     }
 
     /**
@@ -66,9 +81,19 @@ class ClientphysiqueController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function updateClientphysique(Request $request, $id)
     {
-        //
+        $clientphysique = Clientphysique::find($id);
+        $clientphysique->nom = $request->input('nom');
+        $clientphysique->prenom = $request->input('prenom');
+        $clientphysique->adresse = $request->input('adresse');
+        $clientphysique->telephone = $request->input('telephone');
+        $clientphysique->statut = $request->input('statut');
+        $clientphysique->salaire = $request->input('salaire');
+        $clientphysique->save();
+        return redirect('/clientphysique');
+
+
     }
 
     /**
@@ -77,8 +102,10 @@ class ClientphysiqueController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroyClientphysique($id)
     {
-        //
+        $clientphysique = Clientphysique::find($id);
+        $clientphysique->delete();
+        return redirect('/clientphysique');
     }
 }

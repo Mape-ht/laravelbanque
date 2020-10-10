@@ -5,8 +5,8 @@
   </button>
     <div class="collapse navbar-collapse" id="navbarNav">
         <a class="nav-link" href="{{url('/')}}">Accueil <span class="sr-only">(current)</span></a>
-        <a class="nav-link" href="{{url('/create')}}">Créer Nouveau Client Moral </a>
-        <a class="nav-link" href="#">Créer Nouveau Client Physique </a>
-        <a class="nav-link" href="#">Créer Nouveau Compte </a>
+        <a class="nav-link" href="{{url('/create')}}">Créer Client Entreprise </a>
+        <a class="nav-link" href="{{url('/clientphysique/createClientphysique')}}">Créer Client Particulier </a>
+        <a class="nav-link" href="{{url('/compte/createCompte')}}">Créer Compte </a>
     </div>
 </nav>

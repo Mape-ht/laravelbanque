@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Compte;
 use Illuminate\Http\Request;
 
 class CompteController extends Controller
@@ -11,9 +12,10 @@ class CompteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function indexCompte()
     {
-        //
+        $compte = Compte::all();
+        return view('compte',['comptes'=>$compte,'layout'=>'indexCompte']);
     }
 
     /**
@@ -21,9 +23,10 @@ class CompteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function createCompte()
     {
-        //
+        $compte = Compte::all();
+        return view('compte',['comptes'=>$compte,'layout'=>'createCompte']);
     }
 
     /**
@@ -32,9 +35,17 @@ class CompteController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function storeCompte(Request $request)
     {
-        //
+        $compte = new Compte();
+        $compte->numero = $request->input('numero');
+        $compte->clerib = $request->input('clerib');
+        $compte->solde = $request->input('solde');
+        $compte->typefrais = $request->input('typefrais');
+        $compte->typecompte = $request->input('typecompte');
+        $compte->dateouverture = $request->input('dateouverture');
+        $compte->save();
+        return redirect('/compte');
     }
 
     /**
@@ -43,9 +54,11 @@ class CompteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function showCompte($id)
     {
-        //
+        $compte = Compte::find($id);
+        $comptes = Compte::all();
+        return view('compte',['comptes'=>$comptes,'compte'=>$compte,'layout'=>'showCompte']); 
     }
 
     /**
@@ -54,9 +67,11 @@ class CompteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function editCompte($id)
     {
-        //
+        $compte = Compte::find($id);
+        $comptes = Compte::all();
+        return view('compte',['comptes'=>$comptes,'compte'=>$compte,'layout'=>'editCompte']); 
     }
 
     /**
@@ -66,9 +81,18 @@ class CompteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function updateCompte(Request $request, $id)
     {
-        //
+        $compte = Compte::find($id);
+        $compte->numero = $request->input('numero');
+        $compte->clerib = $request->input('clerib');
+        $compte->solde = $request->input('solde');
+        $compte->typefrais = $request->input('typefrais');
+        $compte->typecompte = $request->input('typecompte');
+        $compte->dateouverture = $request->input('dateouverture');
+        $compte->save();
+        return redirect('/compte');
+        
     }
 
     /**
@@ -77,8 +101,10 @@ class CompteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroyCompte($id)
     {
-        //
+        $compte = Compte::find($id);
+        $compte->delete();
+        return redirect('/compte');
     }
 }
