@@ -21,7 +21,20 @@ class CreateComptesTable extends Migration
             $table->string('typefrais');
             $table->string('typecomte');
             $table->string('dateouverture');
+            $table->unsignedBigInteger('clientmoral_id');
+            $table->unsignedBigInteger('clientphysique_id');
             $table->timestamps();
+
+            //foreign keys
+            $table  ->foreign('clientmoral_id')
+                    ->references('id')
+                    ->on('clientmorals')
+                    ->onDelete('cascade');
+            
+            $table  ->foreign('clientphysique_id')
+                    ->references('id')
+                    ->on('clientphysiques')
+                    ->onDelete('cascade');
         });
     }
 

@@ -102,6 +102,16 @@
             <label for="statut">Statut</label>
             <input value="{{$clientphysique->statut}}" type="text" class="form-control" id="statut" name="statut" placeholder="statut">
           </div>
+          <!--foreign key lister les clients moral dans la form creation nouveau client physique-->
+          <div class="form-group">
+            <label for="selectEmployeur">Employeur</label>
+            <select class="form-control" name="employeur" id="selectEmployeur">
+              <option value="non selection">Employeur</option>
+              @foreach($clientmorals as $clientmoral)
+              <option value="{{ $clientmoral->id }}">{{ $clientmoral->name }}</option>
+              @endforeach
+            </select>
+          </div>
           <div class="form-group">
             <label for="salaire">Salaire</label>
             <input value="{{$clientphysique->salaire}}" type="text" class="form-control" id="salaire" name="salaire" placeholder="salaire">

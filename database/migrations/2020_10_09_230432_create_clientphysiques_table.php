@@ -21,7 +21,14 @@ class CreateClientphysiquesTable extends Migration
             $table->string('telephone');
             $table->string('statut');
             $table->string('salaire');
+            $table->unsignedBigInteger('clientmoral_id');
             $table->timestamps();
+
+            //foreign key
+            $table  ->foreign('clientmoral_id')
+                    ->references('id')
+                    ->on('clientmorals')
+                    ->onDelete('cascade');
         });
     }
 
